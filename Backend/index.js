@@ -15,7 +15,7 @@ app.use('/product',product);
 
 // Connect to MongoDB
 const connect =async () => {
-    await  mongoose.connect(process.env.MONGO_URL)
+    await  mongoose.connect(process.env.MONGO_URL,{ useNewUrlParser: true, useUnifiedTopology: true })
     console.log("Connected to db");
 }
 
