@@ -6,14 +6,15 @@ const productSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    category:String,
+
     expiry_date :{
         type:Date,
         required:true
     },
+    batch_number:Number,
     quantity:Number,
     user :{
-        type: mongoose.Schema.Types.ObjectId,
+        type:mongoose.Schema.Types.ObjectId,
         ref: 'User'
     }
 });

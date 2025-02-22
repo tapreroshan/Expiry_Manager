@@ -3,15 +3,19 @@ const app = express();
 const mongoose = require("mongoose");
 const product=require("./Routes/product.route")
 const user = require('./Routes/user.route')
+const cors=require("cors")
+require("dotenv").config()
 // Middleware
 
 app.use(express.json());
-app.use("/",user)
+
+app.use(cors())
+app.use("/auth",user)
 app.use('/product',product);
 
 // Connect to MongoDB
 const connect =async () => {
-    await  mongoose.connect("mongodb://127.0.0.1:27017/Expriy_Mangaer")
+    await  mongoose.connect(process.env.MONGO_URL)
     console.log("Connected to db");
 }
 

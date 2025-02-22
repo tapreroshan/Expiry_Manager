@@ -8,10 +8,21 @@ const jwttoken= (user)=>{
 }
 
 const signup = async (req,res) => {
-    const newUser = new usermodel(req.body);
-    const token =jwttoken(user)
+    try {
+        const {name,email,password}=req.body
+    const newUser = new usermodel({name,email,password});
+    //checke email exist
+    const userExist = await usermodel.findOne({email});
+    if (userExist){
+        console.log("Email already exists")
+        return res.status(400).json({"message": 'Email already exists'})
+    }
+    const token =jwttoken(newUser)
     await newUser.save();
-    res.json({user: newUser, token}).status(201);
+    res.json({ token, name: newUser.name}).status(201);
+    } catch (error) {
+        res.status(400).json({message:"something went wrong",error: error})
+    }
 }
 
 // Login 
