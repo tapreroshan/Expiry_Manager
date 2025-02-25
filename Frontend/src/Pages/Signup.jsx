@@ -18,7 +18,7 @@ const Signup = () => {
     try {
       // 1. Send registration request to backend
       const response = await axios.post(
-        'http://localhost:5000/auth/signup',
+        'https://expiry-manager-2-backend.onrender.com/auth/signup',
         { name, email, password },
         {
           headers: {

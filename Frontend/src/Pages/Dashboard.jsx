@@ -15,7 +15,7 @@ const Dashboard = () => {
   });
   const [searchQuery, setSearchQuery] = useState('');
   const [filterExpiringSoon, setFilterExpiringSoon] = useState(false);
-  const [userName, setUserName] = useState(''); // State for user's name
+  // const [userName, setUserName] = useState(''); // State for user's name
 
   // Fetch medicines and user data from backend
   useEffect(() => {
@@ -28,7 +28,7 @@ const Dashboard = () => {
         }
 
         // Fetch medicines
-        const medicinesResponse = await axios.get('http://localhost:5000/product/medicines', {
+        const medicinesResponse = await axios.get('https://expiry-manager-2-backend.onrender.com/product/medicines', {
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -37,7 +37,7 @@ const Dashboard = () => {
         setMedicines(medicinesResponse.data);
 
         // Fetch user data
-        const userResponse = await axios.get('http://localhost:5000/auth/user', {
+        const userResponse = await axios.get('https://expiry-manager-2-backend.onrender.com/auth/user', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -65,7 +65,7 @@ const Dashboard = () => {
         console.log("Access Denied. No token provided");
         return;
       }
-      const response = await axios.post('http://localhost:5000/product/add', 
+      const response = await axios.post('https://expiry-manager-2-backend.onrender.com/product/add', 
         {
           name: newMedicine.name,
           expiry_date: new Date(newMedicine.expiry_date),
@@ -97,7 +97,7 @@ const Dashboard = () => {
   const handleDeleteMedicine = async (id) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:5000/product/delete/${id}`, {
+      await axios.delete(`https://expiry-manager-2-backend.onrender.com/product/delete/${id}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -113,7 +113,7 @@ const Dashboard = () => {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.put(`http://localhost:5000/product/update/${editingMedicine._id}`, 
+      const response = await axios.put(`https://expiry-manager-2-backend.onrender.com/product/update/${editingMedicine._id}`, 
         {
           name: editingMedicine.name,
           expiry_date: new Date(editingMedicine.expiry_date),

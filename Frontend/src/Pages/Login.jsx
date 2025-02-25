@@ -11,7 +11,7 @@ const Login = () => {
     e.preventDefault();
     try {
       // 1. Send login request to backend
-      const response = await axios.post('http://localhost:5000/auth/login', 
+      const response = await axios.post('https://expiry-manager-2-backend.onrender.com/auth/login', 
         { email, password },
         {
           headers: {
@@ -64,6 +64,7 @@ const Login = () => {
           <button
             type="submit"
             className="w-full py-2 px-4 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700"
+            
           >
             Login
           </button>
